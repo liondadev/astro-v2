@@ -1,4 +1,6 @@
-// Badges API - Create / Get / Display badges across gameservers
+/*
+    AstroPet v2
+*/
 
 // Setup express
 const express = require("express")
