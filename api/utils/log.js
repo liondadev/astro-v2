@@ -31,7 +31,7 @@ colors.set("cyan", "\u001b[36m")
 colors.set("white", "\u001b[37m")
 colors.set("reset", "\u001b[0m")
 
-module.exports = (message, color) => {
+const log = (message, color) => {
     if (typeof message === "object") {
         message = JSON.stringify(message);
     }
@@ -44,3 +44,5 @@ module.exports = (message, color) => {
         console.log(message)
     }
 }
+
+module.exports = log

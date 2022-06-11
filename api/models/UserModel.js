@@ -6,29 +6,29 @@ const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: [true, "Please enter a username"],
         unique: true
     },
     password: {
         type: String,
-        required: true
+        required: [true, "Please enter a password"],
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Please enter an email"],
         unique: true
     },
     firstName: {
         type: String,
-        required: true
+        required: [true, "Please enter a first name"]
     },
     lastName: {
         type: String,
-        required: true
+        required: [true, "Please enter a last name"]
     },
     phone: {
         type: String,
-        required: false
+        required: [true, "Please enter a phone number"]
     },
     uuid: {
         type: String,
@@ -44,3 +44,6 @@ const UserSchema = new mongoose.Schema({
         type: String
     }],
 })
+
+const UserModel = new mongoose.model("User", UserSchema)
+module.exports = UserModel
