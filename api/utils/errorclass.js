@@ -3,10 +3,10 @@
 */
 
 class BetterError extends Error {
-  constructor(msg, errCode) {
-    this.msg = msg;
-    this.code = errCode;
-  }
+    constructor(msg, errCode) {
+        this.msg = msg
+        this.code = errCode
+    }
 }
 
-module.exports = BetterError;
+module.exports = BetterError

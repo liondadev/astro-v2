@@ -21,30 +21,28 @@ let colors = new Map();
     Reset: \u001b[0m
 */
 
-colors.set("black", "\u001b[30m");
-colors.set("red", "\u001b[31m");
-colors.set("green", "\u001b[32m");
-colors.set("yellow", "\u001b[33m");
-colors.set("blue", "\u001b[34m");
-colors.set("magenta", "\u001b[35m");
-colors.set("cyan", "\u001b[36m");
-colors.set("white", "\u001b[37m");
-colors.set("reset", "\u001b[0m");
+colors.set("black", "\u001b[30m")
+colors.set("red", "\u001b[31m")
+colors.set("green", "\u001b[32m")
+colors.set("yellow", "\u001b[33m")
+colors.set("blue", "\u001b[34m")
+colors.set("magenta", "\u001b[35m")
+colors.set("cyan", "\u001b[36m")
+colors.set("white", "\u001b[37m")
+colors.set("reset", "\u001b[0m")
 
 const log = (message, color) => {
-  if (typeof message === "object") {
-    message = JSON.stringify(message);
-  }
+    if (typeof message === "object") {
+        message = JSON.stringify(message);
+    }
 
-  let time = new Date().toLocaleString();
+    let time = new Date().toLocaleString();
 
-  if (color) {
-    console.log(
-      `${colors.get(color)}[${time}] >> ${message}${colors.get("reset")}`
-    );
-  } else {
-    console.log(message);
-  }
-};
+    if (color) {
+        console.log(`${colors.get(color)}[${time}] >> ${message}${colors.get("reset")}`)
+    } else {
+        console.log(message)
+    }
+}
 
-module.exports = log;
+module.exports = log
