@@ -35,6 +35,7 @@ const createUser = async (username, password, email, firstName, lastName, phone)
             apiKey: apiKey,
             roles: []
         })
+
         await user.save()
         return true, "User created & Saved correctly!"
     } catch (e) {
@@ -43,8 +44,4 @@ const createUser = async (username, password, email, firstName, lastName, phone)
 
         return false, "Error when creating user!"
     }
-}
-
-const login = (emailOrUsername, password) => {
-    if (!emailOrUsername || !password) return false, "Email/Username or Password not provided!"
 }
