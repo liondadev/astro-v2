@@ -96,6 +96,7 @@ const userHasPermission = async (uuid, id) => {
             if (perm == id || perm == '*') { // * perm means all perms
                 return true
             }
+            if (perm == id) return true
         });
 
         return false // Just incase the perms aren't there!

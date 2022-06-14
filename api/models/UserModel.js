@@ -16,7 +16,13 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, "Please enter an email"],
-        unique: true
+        unique: true,
+        validate: {
+            validator: (emailStr) => { // I really love regex (Just kidding, someone should make an easier way of doing thais)
+                return String(emailStr).toLowerCase().match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)
+            },
+            message: "Invalid email!"
+        }
     },
     firstName: {
         type: String,
@@ -26,9 +32,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter a last name"]
     },
-    phone: {
+    passwordSalt: {
         type: String,
-        required: [true, "Please enter a phone number"]
+        required: [true, "Please add a password salt"]
     },
     uuid: {
         type: String,

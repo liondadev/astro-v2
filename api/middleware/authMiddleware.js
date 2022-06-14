@@ -2,8 +2,8 @@
     Middleware for authentication management with JWT Tokens
 */
 
-const jwt = require("jwt")
-const BetterError = require("../utils/errorclass")
+const jwt = require("jsonwebtoken")
+const log = require("../utils/log")
 const UserModel = require("../models/UserModel")
 const { JWTSecret } = require("../config/jsonwebtoken")
 const { userHasPermission } = require("../utils/roles")
@@ -18,39 +18,63 @@ const jwtVerify = (jwtToken) => {
    }
 }
 
-const getLoggedInUser = async (req, res, next) => {
+const checkLoggedUser = async (req, res, next) => {
     let userToken
 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         userToken = req.headers.authorization.split(' ')[1]
     } else if (req.cookies.jwt) {
         userToken = req.cookies.jwt
+    } else {
+        return res.status(400).json({
+            success: false,
+            errorCode: "userNotLoggedIn",
+            message: "User is not logged in! (1)"
+        })
     }
 
     if (!userToken) {
-        return next( new BetterError("User not logged in!", 403) )
+        return res.status(400).json({
+            success: false,
+            errorCode: "userNotLoggedIn",
+            message: "User is not logged in! (2)"
+        })
     }
 
     const [isVerified, decoded, verifyErr] = jwtVerify(userToken)
     if (!isVerified || verifyErr) {
-        return next( new BetterError("Failed to verify JWT Token!", 403) )
+        return res.status(400).json({
+            success: false,
+            errorCode: "userFailToVerifyJWT",
+            message: "Failed to verify JWT Token"
+        })
     }
 
-    const foundUser = UserModel.findOne({ uuid: decoded.uuid })
+    const foundUser = await UserModel.findOne({ uuid: decoded.uuid })
     if (!foundUser) {
-        return next( new BetterError("User with uuid provided in JWT token was not found! Could be a signing error?") )
+        return res.status(400).json({
+            success: false,
+            errorCode: "userInvalidJWT",
+            message: "Invalid JWT Token"
+        })
     }
+
+    // Deelete Sensitive Things
+    const user = foundUser.toObject()
+    user._id = undefined
+    user.password = undefined
+    user.passwordSalt = undefined
 
     // Set the req.user
-    req.user = foundUser
+    req.user = user
     next()
 }
 
 const protectedRoute = (permission) => (req, res, next) => {
-    return userHasPermission(permission)
+    return userHasPermission(req.user.uuid, permission)
 }
 
 module.exports = {
-    getLoggedInUser,
+    checkLoggedUser,
     protectedRoute
 }

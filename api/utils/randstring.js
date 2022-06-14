@@ -2,7 +2,7 @@
     Generates a random string
 */
 
-const chars = "abcdefghijklmnopqrstuvwxyz1234567890_."
+const chars = "$#_/-abcdefghijklmnopqrstuvwxyz1234567890"
 
 const generateStr = (len) => {
     let str = ""

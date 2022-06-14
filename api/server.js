@@ -6,6 +6,7 @@
 const express = require("express")
 const app = express()
 const log = require("./utils/log")
+const cookieParser = require("cookie-parser")
 
 // Environment Variables
 const { PORT, MONGO_HOST, MONGO_USERNAME, MONGO_PASSWORD, MONGO_PORT } = require("./config/config")
@@ -30,13 +31,13 @@ connectToDB = () => {
 
 connectToDB(true)
 
-// This is an example route, feel free to delete it.
-app.get("/", (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "Hello World!"
-    })
-})
+// Express middleware
+app.use(express.json()) // Allow req.body to be JSON
+app.use(cookieParser()) // Allow req.cookies to exist
+
+// Authentication Routes
+const authRoutes = require("./routes/auth")
+app.use("/auth/", authRoutes)
 
 // Listen on a port!
 app.listen(PORT, () => log(`Server listening on port ${PORT}!`, 'green'))
