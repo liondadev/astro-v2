@@ -7,6 +7,7 @@ const express = require("express")
 const app = express()
 const log = require("./utils/log")
 const cookieParser = require("cookie-parser")
+const logEverything = require("./middleware/logger")
 
 // Environment Variables
 const { PORT, MONGO_HOST, MONGO_USERNAME, MONGO_PASSWORD, MONGO_PORT } = require("./config/config")
@@ -34,10 +35,14 @@ connectToDB(true)
 // Express middleware
 app.use(express.json()) // Allow req.body to be JSON
 app.use(cookieParser()) // Allow req.cookies to exist
+app.use((req, res, next) => {
+    log(`\nRequest Recieved:\n[${req.method || "unknown method"} => ${req.url || "unknown URL???"}]: ${JSON.stringify(req.body) || "no request body"}\n`, 'cyan')
+    next()
+}) // Log EVERYTHING
 
 // Authentication Routes
 const authRoutes = require("./routes/auth")
-app.use("/auth/", authRoutes)
+app.use("/v1/auth/", authRoutes)
 
 // Listen on a port!
 app.listen(PORT, () => log(`Server listening on port ${PORT}!`, 'green'))

@@ -54,7 +54,7 @@ const signUpUser = async (req, res) => {
         })
         await createdUser.save()
 
-        let user = user.toObject()
+        let user = await createdUser.toObject()
         user._id = undefined
         user.password = undefined
         user.passwordSalt = undefined

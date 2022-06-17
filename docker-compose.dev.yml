@@ -14,9 +14,7 @@ services:
 
   dashboard:
     volumes:
-      - ./client/dashboard:/app:ro
-      - app/node_modules
-      - app/.next
+      - ./client/dashboard:/app
     build:
       context: ./client/dashboard
       args:
