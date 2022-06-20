@@ -12,8 +12,10 @@ services:
     command: node server.js
     depends_on:
       - mongo
+    restart: always
 
   dashboard:
+    restart: always
     build: ./client/dashboard
     env_file:
       - ./environment/dashboard.env
@@ -26,6 +28,7 @@ services:
       - api
 
   mongo:
+    restart: always
     image: mongo
     env_file:
       - ./environment/mongodb.env

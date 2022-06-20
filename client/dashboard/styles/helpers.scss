@@ -1,0 +1,18 @@
+.totalcenter {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+
+.buttongrid {
+    display: flex;
+    gap: 0.5em;
+}
+
+
+.centerflex {
+    align-items: center;
+    justify-content: center;
+}

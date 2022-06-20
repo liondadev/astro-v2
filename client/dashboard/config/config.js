@@ -1,3 +1,3 @@
 module.exports = {
-    apiBaseURL: process.env.API_BASE_URL || "http://localhost:5000"
+    API_URL: process.env.API_URL || "http://api" // ${API_URL}/req/link
 }

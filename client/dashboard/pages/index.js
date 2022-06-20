@@ -1,7 +1,17 @@
-import useAuthedUser from "../hooks/useAuthedUser"
+/*
+
+    Index / SignIn page
+    If the user is already logged in, redirect to the dashboard
+    Else, render the sign in page
+
+*/
+
+import AuthHomePage from "../components/auth/AuthHomePage/authhomepage"
 
 function IndexPage() {
-    return <p>Next.js is cool, i guess...</p>
+    return (
+        <AuthHomePage />
+    )
 }
 
 export default IndexPage

@@ -1,6 +1,5 @@
-# 📦 Express, MongoDB, & Docker Template
-This repo is an example of how to setup ExpressJS, MongoDB (with mongoose), and Docker in a Production & development environment.
-This utilizes docker-compose to quickly setup the project for development & production
+# 🚀 Astro
+Astro is a Docker Container management platform meant for servers that primarily run docker containers. Astro is powered by Node.JS which allows for easy prototyping and development.
 
 
 ## 📝 Requirements
