@@ -4,7 +4,7 @@ import Cookies from "cookies"
 
 export default function handler(req, res) {
   const cookies = new Cookies(req, res)
-  const token = cookies.get("jwt")
+  const token = cookies.get('jwt')
 
   if (token && token !== "undefined" && token != "loggedOut") {
     res.json({ authed: true, token })

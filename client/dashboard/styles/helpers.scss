@@ -1,10 +1,15 @@
-.totalcenter {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+.flexcenterconainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: url(https://raw.githubusercontent.com/liondadev/astro-assets/main/dcm/auth/page-background.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 
+.shadowed {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
 
 .buttongrid {
     display: flex;

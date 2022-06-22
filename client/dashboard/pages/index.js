@@ -10,7 +10,7 @@ import AuthHomePage from "../components/auth/AuthHomePage/authhomepage"
 
 function IndexPage() {
     return (
-        <AuthHomePage />
+        <div className={"flexcenterconainer"}><AuthHomePage /></div>
     )
 }
 
