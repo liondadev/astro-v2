@@ -1,123 +1,70 @@
 /*
-    Role Management Utility
+    Role & Permission management
 */
 
-// Import utilities and models
-const log = require("../utils/log")
-const User = require("../models/UserModel")
-
-// Setup the default maps containing roles and permissions
+// Create the maps used for roles & permissions
 const roles = new Map()
 const permissions = new Map()
 
-// Role Schema
-// [roleID] = { name: String, color: StringHex, powerLevel: Number, permissions: [ [permissionName] = Boolean ] }
+// Register a role
+const registerRole = () => {
 
-// Permission Schema
-// [permissionID] = { name: String, desc: String, Default: Boolean }
-
-// Roles
-const registerRole = (id, name, color, powerLvl, permissions) => {
-    if (!id || !name || !color || !powerLvl || !permissions) return false;
-
-    const roleObject = {
-        name: name || id,
-        color: color || "#ffffff", // Color HEX, defaults to white
-        powerLevel: powerLvl || 0, // Higher power level = more permissions
-        permissions: permissions || [] // Array containing the permissions the role posesses
-    }
-
-    log(`Registered role: ${JSON.stringify(roleObject)}`, yellow)
-
-
-    roles.set(id, roleObject)
 }
 
-const getRoleObject = (id) => {
-    if (!id) return false;
+// Register a permission
+const registerPermission = () => {
 
-    const roleObject = map.get(id)
-    return roleObject || false
 }
 
-// Permissions
-const registerPermission = (id, name, description, def) => {
-    if (!id || !name || !description || !def) return false;
+// Get the object for a role
+const getRole = () => {
 
-    const permissionObject = {
-        name: name || "Unnamed Permission",
-        description: description || "No permission on this description",
-        default: def || false
-    }
-
-    log(`Registered permission: ${JSON.stringify(permissionObject)}`, yellow)
-
-    map.set(id, permissionObject)
 }
 
-const getPermissionObject = (id) => {
-    if (!id) return false;
+// Get the object for a permission
+const getPermission = () => {
 
-    const permissionObject = map.get(id)
-    return permissionObject || false
 }
 
-// Checking if a user has a role
-const getPermissionsForUser = async (uuid) => {
-    if (!uuid) return false;
-    try {
-        const user = await User.findOne({ uuid: uuid }).exec() // Get the user object
-        let rolesArray = [] // Initalize the role array
-        let permissionsArray = [] // Initalize the permision array
+// Check if a user has a role
+const userHasRole = () => {
 
-        if (user.roles == []) return {}
-
-        user.roles.forEach(role => rolesArray.push(getRoleObject(role))) // Add all the roles to the roles array
-        rolesArray.permissions.forEach(perm => permissionsArray.push(perm)) // Add all the permissions from the role
-                                                                            // to the permission arrau
-
-        return permissionsArray
-    } catch (e) {
-        // Log the error, just incase
-        log(`Exception when getting all the perms for a user:\n${e}`, red)
-
-        return {}
-    }
 }
 
-const userHasPermission = async (uuid, id) => {
-    if (!uuid || !id) return false;
-    try {
-        const userPermsList = getPermissionsForUser(uuid)
+// Get list of roles for a user
+const getUserRolesList = () => {
 
-        if (userPermsList == {}) return getPermissionObject(id).default || false
-
-        userPermsList.forEach(perm => {
-            if (perm == id || perm == '*') { // * perm means all perms
-                return true
-            }
-            if (perm == id) return true
-        });
-
-        return false // Just incase the perms aren't there!
-    } catch (e) {
-        // Log the error, just incase
-        log(`Exception when checking if user has permission:\n${e}`, red)
-
-        return false
-    }
 }
 
-// Export everything
-// NOTE: Theese functions, except userHasPermission and getPermissionsForUser
-//       should not be called unless they are required.
-//
-//       They should only be called in the config file.
+// Check if a user has a permission
+const userHasPermission = () => {
+
+}
+
+// Get list of permissions for a user
+const getUserPermissionsList = () => {
+
+}
+
+// Grant a role to a user
+const grantUserRole = () => {
+
+}
+
+// Revoke a role to a user
+const revokeUserRole = () => {
+
+}
+
 module.exports = {
     registerRole,
-    getRoleObject,
     registerPermission,
-    getPermissionObject,
-    getPermissionsForUser,
-    userHasPermission
+    getRole,
+    getPermission,
+    userHasRole,
+    getUserRolesList,
+    userHasPermission,
+    getUserPermissionsList,
+    grantUserRole,
+    revokeUserRole
 }
