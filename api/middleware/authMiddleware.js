@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken")
 const log = require("../utils/log")
 const UserModel = require("../models/UserModel")
 const { JWTSecret } = require("../config/jsonwebtoken")
-const { userHasPermission } = require("../utils/roles")
 
 // Function to verify a JWT Token
 // We also return the decoded value
@@ -110,7 +109,7 @@ const checkLoggedUser = async (req, res, next) => {
 }
 
 const protectedRoute = (permission) => (req, res, next) => {
-    return userHasPermission(req.user.uuid, permission)
+    return false // TODO: Update this with the new role system
 }
 
 module.exports = {
