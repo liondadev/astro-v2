@@ -123,13 +123,36 @@ const userHasPermission = async (uuid, permissionID) => {
 
 
 // Grant a role to a user
-const grantUserRole = () => {
+const grantUserRole = async (uuid, roleID) => {
+    // Verify values were passed correctly
+    if (!uuid || !roleID) return false
 
+    // Find the user object to apply the role to
+    const user = await UserModel.findOne({uuid: uuid}).exec()
+    if (!user) return false
+
+    user.roles.push(roleID)
+    await user.save()
+    return true
 }
 
 // Revoke a role to a user
-const revokeUserRole = () => {
+const revokeUserRole = async (uuid, roleID) => {
+    // Verify values were passed correctly
+    if (!uuid || !roleID) return false
 
+    // Find the user object to apply the role to
+    const user = await UserModel.findOne({uuid: uuid}).exec()
+    if (!user) return false
+
+    // https://stackoverflow.com/questions/3954438/how-to-remove-item-from-array-by-value
+    let index = user.roles.indexOf(item);
+    if (index !== -1) {
+        user.roles.splice(index, 1);
+    }
+
+    await user.save()
+    return true
 }
 
 module.exports = {
