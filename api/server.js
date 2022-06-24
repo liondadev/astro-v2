@@ -13,8 +13,8 @@ const logEverything = require("./middleware/logger")
 const { PORT, MONGO_HOST, MONGO_USERNAME, MONGO_PASSWORD, MONGO_PORT } = require("./config/config")
 
 // Before anything happens, setup cors
-const cors = require("cors");
-app.use(cors());
+const cors = require("cors")
+app.use(cors())
 
 // Connect to mongodb database
 const mongoose = require("mongoose")
