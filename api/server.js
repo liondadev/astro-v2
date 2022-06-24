@@ -10,11 +10,19 @@ const cookieParser = require("cookie-parser")
 const logEverything = require("./middleware/logger")
 
 // Environment Variables
-const { PORT, MONGO_HOST, MONGO_USERNAME, MONGO_PASSWORD, MONGO_PORT } = require("./config/config")
+const { PORT, MONGO_HOST, MONGO_USERNAME, MONGO_PASSWORD, MONGO_PORT, WEB_FRONTEND_URL } = require("./config/config")
 
 // Before anything happens, setup cors
 const cors = require("cors")
-app.use(cors())
+let corsOptions = {
+    origin: WEB_FRONTEND_URL
+}
+app.use(cors(corsOptions))
+// Access-Control-Allow-Credentials
+app.use((req, res, next) => {
+    res.set('Access-Control-Allow-Credentials', 'true')
+    next()
+})
 
 // Connect to mongodb database
 const mongoose = require("mongoose")

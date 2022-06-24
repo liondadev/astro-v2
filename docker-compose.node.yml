@@ -1,0 +1,5 @@
+version: '3'
+
+services:
+  runasnode:
+    build: ./run-as-node
