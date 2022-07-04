@@ -1,4 +1,3 @@
-import useJWTToken from "../../hooks/useJWTToken"
 import useAuthedUser from "../../hooks/useAuthedUser"
 
 import DashboardLoading from "../../components/dashboard/DashboardLoading/dashboardloading"
@@ -9,7 +8,6 @@ import Container from "react-bootstrap/Container"
 
 function DashIndexPage() {
     const [authSuccess, authIsLoading, user] = useAuthedUser()
-
     if (authIsLoading) {
         return <DashboardLoading />
     }

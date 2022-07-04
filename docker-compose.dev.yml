@@ -22,3 +22,8 @@ services:
     command: npm run dev
     environment:
       - NODE_ENV=developmet
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 10G

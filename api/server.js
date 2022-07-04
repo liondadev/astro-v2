@@ -7,7 +7,6 @@ const express = require("express")
 const app = express()
 const log = require("./utils/log")
 const cookieParser = require("cookie-parser")
-const logEverything = require("./middleware/logger")
 
 // Environment Variables
 const { PORT, MONGO_HOST, MONGO_USERNAME, MONGO_PASSWORD, MONGO_PORT, WEB_FRONTEND_URL } = require("./config/config")
