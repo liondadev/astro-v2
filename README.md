@@ -1,6 +1,7 @@
 # 🚀 Astro
 Astro is a Docker Container management platform meant for servers that primarily run docker containers. Astro is powered by Node.JS which allows for easy prototyping and development.
 
+# This project is discontinued, and doesn't work. It's more of a demo for authentication
 
 ## 📝 Requirements
 - Docker
